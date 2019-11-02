@@ -21,7 +21,10 @@ public class KmlTest {
 		polygonPoints.add(new Position(-2, 0));
 		Polygon polygon = new Polygon(polygonPoints);
 		
-		kml = KmlGenerator.createKml(polygon);
+//		kml = KmlGenerator.createKml(polygon);
+//		System.out.print(kml);
+		
+		kml = KmlGenerator.createKmlLineString(polygonPoints);
 		System.out.print(kml);
 	}
 }

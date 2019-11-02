@@ -1,5 +1,7 @@
 package evac;
 
+import java.util.List;
+
 public class KmlGenerator {
 	private static final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 	private static final String HEADER = "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n";
@@ -50,5 +52,26 @@ public class KmlGenerator {
 		return builder.toString();
 	}
 	
-	
+	public static String createKmlLineString(List<Position> points) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(XML_HEADER);
+		builder.append(HEADER);
+		
+		builder.append("<Placemark>\n");
+		builder.append("  <name>Line String Placemark</name>\n");
+		builder.append("  <description>This is a line string</description>\n");
+		builder.append("  <LineString>\n");
+		builder.append("    <altitudeMode>clampToGround</altitudeMode>\n");
+		builder.append("    <coordinates>\n");
+		for (Position point : points) {
+			builder.append(String.format("      %f,%f\n", point.latitude, point.longitude));
+		}
+		builder.append("    </coordinates>\n");
+		builder.append("  </LineString>\n");
+		builder.append("  <Style><LineStyle><color>7f0000ff</color><width>4</width></LineStyle></Style>\n");
+		builder.append("</Placemark>\n");
+		
+		builder.append(FOOTER);
+		return builder.toString();
+	}
 }

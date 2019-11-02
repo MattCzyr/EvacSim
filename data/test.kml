@@ -1,19 +1,204 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Output Model</name>
+<Folder>
+  <name>Hurricane</name>
 <Placemark>
-  <name>Line String Placemark</name>
-  <description>This is a line string</description>
+  <name>Danger Zone (level 2)</name>
+  <description>2019-11-02T19:13:03.343245-04:00[America/New_York]</description>
+  <Polygon>
+    <altitudeMode>clampToGround</altitudeMode>
+    <outerBoundaryIs><LinearRing><coordinates>
+      -1.000000,-1.000000
+      -1.000000,1.000000
+      0.500000,2.000000
+      1.000000,1.000000
+      1.000000,-1.000000
+      0.500000,-2.000000
+    </coordinates></LinearRing></outerBoundaryIs>
+  </Polygon>
+  <Style><PolyStyle><color>#a00000ff</color><outline>0</outline></PolyStyle></Style>
+</Placemark>
+<Placemark>
+  <name>Danger Zone (level 3)</name>
+  <description>2019-11-02T19:13:03.343254-04:00[America/New_York]</description>
+  <Polygon>
+    <altitudeMode>clampToGround</altitudeMode>
+    <outerBoundaryIs><LinearRing><coordinates>
+      -1.000000,-1.000000
+      -2.000000,-0.875000
+      -2.500000,-0.500000
+      -2.500000,0.500000
+      -2.000000,0.875000
+      -1.000000,1.000000
+    </coordinates></LinearRing></outerBoundaryIs>
+  </Polygon>
+  <Style><PolyStyle><color>#a00000ff</color><outline>0</outline></PolyStyle></Style>
+</Placemark>
+<Placemark>
+  <name>Hurricane Path</name>
   <LineString>
     <altitudeMode>clampToGround</altitudeMode>
     <coordinates>
-      -1.000000,-1.000000
-      -1.000000,1.000000
-      0.000000,2.000000
-      1.000000,1.000000
-      1.000000,-1.000000
-      0.000000,-2.000000
+      -5.000000,-1.000000
+      -2.000000,-0.500000
+      -1.000000,0.000000
     </coordinates>
   </LineString>
-  <Style><LineStyle><color>7f0000ff</color><width>4</width></LineStyle></Style>
+  <Style><LineStyle><color>#ff0000ff</color><width>2</width></LineStyle></Style>
 </Placemark>
+<Placemark>
+  <name>Hurricane Measurement</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>-5.000000, -1.000000</td></tr>
+  <tr><td>Direction</td><td>280.000000° @ 25.000000 mph</td></tr>
+  <tr><td>Wind Speed</td><td>55.000000 mph</td></tr>
+  <tr><td>Wind Gusts</td><td>80.000000 mph</td></tr>
+  <tr><td>Category</td><td>7</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>-5.000000,-1.000000</coordinates>
+  </Point>
+</Placemark>
+<Placemark>
+  <name>Hurricane Measurement</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>-2.000000, -0.500000</td></tr>
+  <tr><td>Direction</td><td>350.000000° @ 20.000000 mph</td></tr>
+  <tr><td>Wind Speed</td><td>50.000000 mph</td></tr>
+  <tr><td>Wind Gusts</td><td>70.000000 mph</td></tr>
+  <tr><td>Category</td><td>7</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>-2.000000,-0.500000</coordinates>
+  </Point>
+</Placemark>
+<Placemark>
+  <name>Hurricane Measurement</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>-1.000000, 0.000000</td></tr>
+  <tr><td>Direction</td><td>0.000000° @ 22.500000 mph</td></tr>
+  <tr><td>Wind Speed</td><td>53.000000 mph</td></tr>
+  <tr><td>Wind Gusts</td><td>95.000000 mph</td></tr>
+  <tr><td>Category</td><td>7</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>-1.000000,0.000000</coordinates>
+  </Point>
+</Placemark>
+</Folder>
+<Folder>
+  <name>Nodes</name>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>0.500000, 0.500000</td></tr>
+  <tr><td>Population</td><td>3000</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>0.500000,0.500000</coordinates>
+  </Point>
+</Placemark>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>1.000000, 0.500000</td></tr>
+  <tr><td>Population</td><td>100000</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>1.000000,0.500000</coordinates>
+  </Point>
+</Placemark>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>1.500000, 0.000000</td></tr>
+  <tr><td>Population</td><td>50000</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>1.500000,0.000000</coordinates>
+  </Point>
+</Placemark>
+</Folder>
+<Folder>
+  <name>Edges</name>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Src Position</td><td>0.500000, 0.500000</td></tr>
+  <tr><td>Dst Position</td><td>1.000000, 0.500000</td></tr>
+  <tr><td>Flow</td><td>20000</td></tr>
+  </table>
+  ]]></description>
+  <LineString>
+    <coordinates>
+      0.500000,0.500000
+      1.000000,0.500000
+    </coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Src Position</td><td>1.000000, 0.500000</td></tr>
+  <tr><td>Dst Position</td><td>1.500000, 0.000000</td></tr>
+  <tr><td>Flow</td><td>5000</td></tr>
+  </table>
+  ]]></description>
+  <LineString>
+    <coordinates>
+      1.000000,0.500000
+      1.500000,0.000000
+    </coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Src Position</td><td>1.500000, 0.000000</td></tr>
+  <tr><td>Dst Position</td><td>1.000000, 0.500000</td></tr>
+  <tr><td>Flow</td><td>25000</td></tr>
+  </table>
+  ]]></description>
+  <LineString>
+    <coordinates>
+      1.500000,0.000000
+      1.000000,0.500000
+    </coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Src Position</td><td>1.500000, 0.000000</td></tr>
+  <tr><td>Dst Position</td><td>0.500000, 0.500000</td></tr>
+  <tr><td>Flow</td><td>28000</td></tr>
+  </table>
+  ]]></description>
+  <LineString>
+    <coordinates>
+      1.500000,0.000000
+      0.500000,0.500000
+    </coordinates>
+  </LineString>
+</Placemark>
+</Folder>
+</Document>
 </kml>

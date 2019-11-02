@@ -3,6 +3,9 @@ package evac;
 public class Main {
 	
 	public static void main(String[] args) {
-		System.out.println("Hello World");
+		InputModel inputModel = null;
+		OutputModel outputModel = NumberCruncher.crunch(inputModel);
+		String kml = KmlGenerator.createKml(outputModel);
+		System.out.println(kml);
 	}
 }

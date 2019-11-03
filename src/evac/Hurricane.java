@@ -10,21 +10,26 @@ class Hurricane {
 	/** Angle of travel of the hurricane, in degrees from east */
 	final float trajectory;
 	
-	final float startSpeed;
-	final float endSpeed;
+	final float velocity;
+	
+	final float startWindSpeed;
+	final float endWindSpeed;
+	
+	int category;
 	
 	final List<HurricaneData> data;
 	final List<DangerZone> dangerZones;
 	
-	Hurricane(String name, Position position, float startSpeed, float endSpeed, float trajectory) {
+	Hurricane(String name, Position position, float velocity, float startWindSpeed, float endWindSpeed, float trajectory) {
 		this.name = name;
 		this.trajectory = trajectory;
-		this.startSpeed = startSpeed;
-		this.endSpeed = endSpeed;
+		this.velocity = velocity;
+		this.startWindSpeed = startWindSpeed;
+		this.endWindSpeed = endWindSpeed;
 		data = new ArrayList<HurricaneData>();
 		dangerZones = new ArrayList<DangerZone>();
 		// TODO change from Instant.now()
-		HurricaneData hd = new HurricaneData(position, Instant.now(), startSpeed, startSpeed);
+		HurricaneData hd = new HurricaneData(position, Instant.now(), startWindSpeed, startWindSpeed);
 		data.add(hd);
 	}
 	
@@ -33,4 +38,18 @@ class Hurricane {
 		this.data = data;
 		this.dangerZones = dangerZones;
 	}*/
+	
+	public void updateCategory(HurricaneData data) {
+		if (data.wind <= 95) {
+			category = 1;
+		} else if (data.wind <= 110) {
+			category = 2;
+		} else if (data.wind <= 129) {
+			category = 3;
+		} else if (data.wind <= 156) {
+			category = 4;
+		} else {
+			category = 5;
+		}
+	}
 }

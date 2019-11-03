@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Instant;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -13,15 +14,49 @@ public class Translator {
 	
 	private InputModel model;
 	
+	private String mainFilename;
 	private String nodesFilename;
 	private String edgesFilename;
 	private String hurricanesFilename;
 	
-	public Translator(InputModel model, String nodesFilename, String edgesFilename, String hurricanesFilename) {
+	public Translator(InputModel model, String mainFilename, String nodesFilename, String edgesFilename, String hurricanesFilename) {
 		this.model = model;
+		this.mainFilename = mainFilename;
 		this.nodesFilename = nodesFilename;
 		this.edgesFilename = edgesFilename;
 		this.hurricanesFilename = hurricanesFilename;
+	}
+	
+	public boolean translateMain() {
+		CSVParser csvParser = null;
+		try {
+			csvParser = CSVFormat.DEFAULT.parse(new FileReader(new File(mainFilename)));
+		} catch (FileNotFoundException e1) {
+			return false;
+		} catch (IOException e) {
+			return false;
+		}
+		for (CSVRecord record : csvParser) {
+			if (record.getRecordNumber() > 1) {
+			    int enabled = Integer.valueOf(record.get(0));
+			    if (enabled >= 0) {
+			    	String functionName = record.get(1);
+			    	if (functionName.equals("setModelStart")) {
+			    		String startTime = record.get(2);
+			    		Instant instant = Instant.parse(startTime);
+			    		Main.setModelStart(instant);
+			    	} else if (functionName.equals("setModelEnd")) {
+			    		String endTime = record.get(2);
+			    		Instant instant = Instant.parse(endTime);
+			    		Main.setModelEnd(instant);
+			    	} else {
+			    		return false;
+			    	}
+			    	System.out.println("EXECUTED FUNCTION : " + record.toString());
+			    }
+			}
+		}
+		return true;
 	}
 	
 	public boolean translateNodes() {
@@ -124,13 +159,14 @@ public class Translator {
 				    	String name = record.get(1);
 				    	float latitude = Float.valueOf(record.get(2));
 				    	float longitude = Float.valueOf(record.get(3));
-				    	float startSpeed = Float.valueOf(record.get(4));
-				    	float endSpeed = Float.valueOf(record.get(5));
-				    	float trajectory = Float.valueOf(record.get(6));
+				    	float startWindSpeed = Float.valueOf(record.get(4));
+				    	float endWindSpeed = Float.valueOf(record.get(5));
+				    	float velocity = Float.valueOf(record.get(6));
+				    	float trajectory = Float.valueOf(record.get(7));
 				    	
 				    	System.out.println("ADDING HURRICANE: " + record.toString());
 				    	
-			    		Hurricane h = new Hurricane(name, new Position(latitude, longitude), startSpeed, endSpeed, trajectory);
+			    		Hurricane h = new Hurricane(name, new Position(latitude, longitude), startWindSpeed, endWindSpeed, velocity, trajectory);
 			    		model.addHurricane(h);
 				    }
 				} else {
@@ -142,7 +178,7 @@ public class Translator {
 	}
 	
 	public boolean vibeCheckHurricane(CSVRecord record) {
-		return record.size() == 7
+		return record.size() == 8
 				&& isInt(record.get(0))
 				&& isFloat(record.get(2))
 				&& isFloat(record.get(3))

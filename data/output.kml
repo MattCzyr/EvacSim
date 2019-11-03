@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Output Model</name>
+<Folder>
+  <name>Hurricane</name>
+<Placemark>
+  <name>Danger Zone (level 2)</name>
+  <description>2019-11-03T10:50:48.612926-05:00[America/New_York]</description>
+  <Polygon>
+    <altitudeMode>clampToGround</altitudeMode>
+    <outerBoundaryIs><LinearRing><coordinates>
+      -73.733333,42.733333
+      -73.716667,42.700000
+      -73.650000,42.700000
+      -73.600000,42.783333
+      -73.683333,42.866667
+    </coordinates></LinearRing></outerBoundaryIs>
+  </Polygon>
+  <Style><PolyStyle><color>#800000ff</color><outline>0</outline></PolyStyle></Style>
+</Placemark>
+<Placemark>
+  <name>Danger Zone (level 3)</name>
+  <description>2019-11-03T10:50:48.612933-05:00[America/New_York]</description>
+  <Polygon>
+    <altitudeMode>clampToGround</altitudeMode>
+    <outerBoundaryIs><LinearRing><coordinates>
+      -73.650000,42.700000
+      -73.600000,42.633333
+      -73.483333,42.700000
+      -73.533333,42.766667
+      -73.600000,42.783333
+    </coordinates></LinearRing></outerBoundaryIs>
+  </Polygon>
+  <Style><PolyStyle><color>#d00000ff</color><outline>0</outline></PolyStyle></Style>
+</Placemark>
+<Placemark>
+  <name>Hurricane Path</name>
+  <LineString>
+    <altitudeMode>clampToGround</altitudeMode>
+    <coordinates>
+      -73.695000,42.838001
+    </coordinates>
+  </LineString>
+  <Style><LineStyle><color>#ff0000ff</color><width>2</width></LineStyle></Style>
+</Placemark>
+<Placemark>
+  <name>Hurricane Measurement</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>-73.695000, 42.838001</td></tr>
+  <tr><td>Direction</td><td>270.000000° @ 20.000000 mph</td></tr>
+  <tr><td>Wind Speed</td><td>80.000000 mph</td></tr>
+  <tr><td>Category</td><td>1.000000</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>-73.695000,42.838001</coordinates>
+  </Point>
+</Placemark>
+</Folder>
+<Folder>
+  <name>Nodes</name>
+<Placemark>
+  <name>EastGreenbush</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>-73.703003, 42.588001</td></tr>
+  <tr><td>Population</td><td>500</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>-73.703003,42.588001</coordinates>
+  </Point>
+</Placemark>
+<Placemark>
+  <name>Brunswick</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>-73.561996, 42.731998</td></tr>
+  <tr><td>Population</td><td>300</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>-73.561996,42.731998</coordinates>
+  </Point>
+</Placemark>
+<Placemark>
+  <name>Schenectady</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>-73.943001, 42.806000</td></tr>
+  <tr><td>Population</td><td>1600</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>-73.943001,42.806000</coordinates>
+  </Point>
+</Placemark>
+<Placemark>
+  <name>Guilderland</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>-73.908997, 42.702000</td></tr>
+  <tr><td>Population</td><td>200</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>-73.908997,42.702000</coordinates>
+  </Point>
+</Placemark>
+<Placemark>
+  <name>Troy</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>-73.686996, 42.717999</td></tr>
+  <tr><td>Population</td><td>700</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>-73.686996,42.717999</coordinates>
+  </Point>
+</Placemark>
+<Placemark>
+  <name>Albany</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Position</td><td>-73.752998, 42.648998</td></tr>
+  <tr><td>Population</td><td>5000</td></tr>
+  </table>
+  ]]></description>
+  <Point>
+    <coordinates>-73.752998,42.648998</coordinates>
+  </Point>
+</Placemark>
+</Folder>
+<Folder>
+  <name>Edges</name>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Src</td><td>Brunswick</td></tr>
+  <tr><td>Dst</td><td>EastGreenbush</td></tr>
+  <tr><td>Src Position</td><td>-73.561996, 42.731998</td></tr>
+  <tr><td>Dst Position</td><td>-73.703003, 42.588001</td></tr>
+  <tr><td>Flow</td><td>300</td></tr>
+  </table>
+  ]]></description>
+  <LineString>
+    <coordinates>
+      -73.561996,42.731998
+      -73.703003,42.588001
+    </coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Src</td><td>Troy</td></tr>
+  <tr><td>Dst</td><td>Albany</td></tr>
+  <tr><td>Src Position</td><td>-73.686996, 42.717999</td></tr>
+  <tr><td>Dst Position</td><td>-73.752998, 42.648998</td></tr>
+  <tr><td>Flow</td><td>200</td></tr>
+  </table>
+  ]]></description>
+  <LineString>
+    <coordinates>
+      -73.686996,42.717999
+      -73.752998,42.648998
+    </coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Src</td><td>Troy</td></tr>
+  <tr><td>Dst</td><td>EastGreenbush</td></tr>
+  <tr><td>Src Position</td><td>-73.686996, 42.717999</td></tr>
+  <tr><td>Dst Position</td><td>-73.703003, 42.588001</td></tr>
+  <tr><td>Flow</td><td>200</td></tr>
+  </table>
+  ]]></description>
+  <LineString>
+    <coordinates>
+      -73.686996,42.717999
+      -73.703003,42.588001
+    </coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>Node</name>
+  <description><![CDATA[
+  <table>
+  <tr><td>Src</td><td>Troy</td></tr>
+  <tr><td>Dst</td><td>Guilderland</td></tr>
+  <tr><td>Src Position</td><td>-73.686996, 42.717999</td></tr>
+  <tr><td>Dst Position</td><td>-73.908997, 42.702000</td></tr>
+  <tr><td>Flow</td><td>300</td></tr>
+  </table>
+  ]]></description>
+  <LineString>
+    <coordinates>
+      -73.686996,42.717999
+      -73.908997,42.702000
+    </coordinates>
+  </LineString>
+</Placemark>
+</Folder>
+</Document>
+</kml>

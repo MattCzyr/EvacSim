@@ -40,8 +40,11 @@ public class KmlGenerator {
 			builder.append("  <name>Node</name>\n");
 			builder.append("  <description><![CDATA[\n");
 			builder.append("  <table>\n");
+			builder.append(String.format("  <tr><td>Src</td><td>%s</td></tr>\n", edge.edge.src.name));
+			builder.append(String.format("  <tr><td>Dst</td><td>%s</td></tr>\n", edge.edge.dst.name));
 			builder.append(String.format("  <tr><td>Src Position</td><td>%f, %f</td></tr>\n", edge.edge.src.position.latitude, edge.edge.src.position.longitude));
 			builder.append(String.format("  <tr><td>Dst Position</td><td>%f, %f</td></tr>\n", edge.edge.dst.position.latitude, edge.edge.dst.position.longitude));
+			
 			builder.append(String.format("  <tr><td>Flow</td><td>%d</td></tr>\n", edge.flow));
 			builder.append("  </table>\n");
 			builder.append("  ]]></description>\n");
@@ -63,7 +66,7 @@ public class KmlGenerator {
 		
 		for (Node node : nodes) {
 			builder.append("<Placemark>\n");
-			builder.append("  <name>Node</name>\n");
+			builder.append(String.format("  <name>%s</name>\n", node.name));
 			builder.append("  <description><![CDATA[\n");
 			builder.append("  <table>\n");
 			builder.append(String.format("  <tr><td>Position</td><td>%f, %f</td></tr>\n", node.position.latitude, node.position.longitude));
@@ -96,7 +99,11 @@ public class KmlGenerator {
 			}
 			builder.append("    </coordinates></LinearRing></outerBoundaryIs>\n");
 			builder.append("  </Polygon>\n");
-			builder.append("  <Style><PolyStyle><color>#a00000ff</color><outline>0</outline></PolyStyle></Style>\n");
+			if (dangerZone.dangerLevel == 3) {
+				builder.append("  <Style><PolyStyle><color>#d00000ff</color><outline>0</outline></PolyStyle></Style>\n");
+			} else {
+				builder.append("  <Style><PolyStyle><color>#800000ff</color><outline>0</outline></PolyStyle></Style>\n");
+			}
 			builder.append("</Placemark>\n");
 		}
 		

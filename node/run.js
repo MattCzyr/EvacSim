@@ -66,7 +66,16 @@ async function run() {
     }
 
     // launch java (generate kml)
-
+    cwd = "/home/elipzer/eclipse-workspace/EvacuationPlanner";
+    try {
+        await run_process("java", [
+            "-classpath",
+            "/home/elipzer/eclipse-workspace/EvacuationPlanner/bin"
+                + ":/home/elipzer/eclipse-workspace/EvacuationPlanner/include/commons-csv-1.7/commons-csv-1.7.jar",
+            "evac.KmlMain" ], cwd);    
+    } catch (e) {
+        console.error(e);
+    }
 
 }
 

@@ -23,24 +23,20 @@ public class KmlTest {
 		dangerZone2Points.add(new Position(0.875, -2));
 		dangerZone2Points.add(new Position(1, -1));
 		
-		List<HurricaneData> hurricaneSightings = new ArrayList<>();
-		hurricaneSightings.add(new HurricaneData(new Position(-1, -5), new Velocity(280, 25), Instant.now(), 55, 80, 7));
-		hurricaneSightings.add(new HurricaneData(new Position(-2.5, -4), new Velocity(350, 20), Instant.now(), 50, 70, 7));
-		hurricaneSightings.add(new HurricaneData(new Position(0, -1.5), new Velocity(0, 22.5), Instant.now(), 53, 95, 7));
+		Hurricane hurricane = new Hurricane("Hurricane1", new Position(-1, -5), new Velocity(280, 25), 80, 125);
+		hurricane.data.add(new HurricaneData(new Position(-2.5, -4), new Velocity(350, 20), Instant.now(), 100));
+		hurricane.data.add(new HurricaneData(new Position(0, -1.5), new Velocity(0, 22.5), Instant.now(), 125));
 		
-		List<DangerZone> dangerZones = new ArrayList<>();
-		dangerZones.add(new DangerZone(new Polygon(dangerZone1Points), 2, Instant.now()));
-		dangerZones.add(new DangerZone(new Polygon(dangerZone2Points), 3, Instant.now()));
-		
-		Hurricane hurricane = new Hurricane(hurricaneSightings, dangerZones);
+		hurricane.dangerZones.add(new DangerZone(new Polygon(dangerZone1Points), 2, Instant.now()));
+		hurricane.dangerZones.add(new DangerZone(new Polygon(dangerZone2Points), 3, Instant.now()));
 		
 		List<Hurricane> hurricanes = new ArrayList<>();
 		hurricanes.add(hurricane);
 		
 		List<Node> nodes = new ArrayList<>();
-		nodes.add(new Node(3000, 7000, new Position(0.5, 0.5)));
-		nodes.add(new Node(100000, 120000, new Position(0.5, 1)));
-		nodes.add(new Node(50000, 100000, new Position(0, 1.5)));
+		nodes.add(new Node("A", 3000, 7000, new Position(0.5, 0.5)));
+		nodes.add(new Node("B", 100000, 120000, new Position(0.5, 1)));
+		nodes.add(new Node("C", 50000, 100000, new Position(0, 1.5)));
 		
 		List<SolvedEdge> edges = new ArrayList<>();
 		edges.add(new SolvedEdge(new Edge(nodes.get(0), nodes.get(1), 7, 20000), 20000));

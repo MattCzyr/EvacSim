@@ -166,7 +166,7 @@ public class Translator {
 				    	
 				    	System.out.println("ADDING HURRICANE: " + record.toString());
 				    	
-			    		Hurricane h = new Hurricane(name, new Position(latitude, longitude), startWindSpeed, endWindSpeed, velocity, trajectory);
+			    		Hurricane h = new Hurricane(name, new Position(latitude, longitude), new Velocity(trajectory, velocity), startWindSpeed, endWindSpeed);
 			    		model.addHurricane(h);
 				    }
 				} else {

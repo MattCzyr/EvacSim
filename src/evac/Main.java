@@ -21,9 +21,9 @@ public class Main {
 		String arg3 = "models/troy_model/edges.csv";
 		String arg4 = "models/troy_model/hurricanes.csv";
 		
-		InputModel model = new InputModel();
+		InputModel inputModel = new InputModel();
 		
-		Translator translator = new Translator(model, arg1, arg2, arg3, arg4);
+		Translator translator = new Translator(inputModel, arg1, arg2, arg3, arg4);
 		
 		if (!translator.translateMain()) {
 			System.out.println("Error while translating main");
@@ -48,8 +48,7 @@ public class Main {
 		}
 		System.out.println("Finished translating hurricanes");
 		
-		// TODO: Start simulation
-        //
+		// Start simulation
 		OutputModel outputModel = NumberCruncher.crunch(inputModel);
 		String kml = KmlGenerator.createKml(outputModel);
 		System.out.println(kml);

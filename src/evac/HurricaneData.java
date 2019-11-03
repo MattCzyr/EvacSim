@@ -9,18 +9,33 @@ class HurricaneData {
 	/** The time this data was recorded */
 	final Instant time;
 	
-	/** Average wind speed, in MPH */
+	/** Wind speed, in MPH */
 	final float wind;
 	
-	/** Fastest recorded wind speed, in MPH */
-	final float gusts;
+	float category;
 	
-	HurricaneData(Position position, Instant time, float wind, float gusts) {
+	Velocity velocity;
+	
+	HurricaneData(Position position, Velocity velocity, Instant time, float wind) {
 		this.position = position;
 		this.velocity = velocity;
 		this.time = time;
 		this.wind = wind;
-		this.gusts = gusts;
+		updateCategory();
+	}
+	
+	public void updateCategory() {
+		if (wind <= 95) {
+			category = 1;
+		} else if (wind <= 110) {
+			category = 2;
+		} else if (wind <= 129) {
+			category = 3;
+		} else if (wind <= 156) {
+			category = 4;
+		} else {
+			category = 5;
+		}
 	}
 	
 }

@@ -123,7 +123,7 @@ public class KmlGenerator {
 			builder.append(String.format("  <tr><td>Direction</td><td>%f\u00b0 @ %f mph</td></tr>\n", hurricaneData.velocity.inclination, hurricaneData.velocity.speed));
 			builder.append(String.format("  <tr><td>Wind Speed</td><td>%f mph</td></tr>\n", hurricaneData.wind));
 			//builder.append(String.format("  <tr><td>Wind Gusts</td><td>%f mph</td></tr>\n", hurricaneData.gusts));
-			builder.append(String.format("  <tr><td>Category</td><td>%d</td></tr>\n", hurricaneData.category));
+			builder.append(String.format("  <tr><td>Category</td><td>%f</td></tr>\n", hurricaneData.category));
 			builder.append("  </table>\n");
 			builder.append("  ]]></description>\n");
 			builder.append("  <Point>\n");

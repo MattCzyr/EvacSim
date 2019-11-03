@@ -1,22 +1,14 @@
 package evac;
 
-import java.time.Instant;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
-	
-	public static Instant modelStart;
-	public static Instant modelEnd;
-	
+public class AmplPrepMain {
 	public static void main(String[] args) {
-		// Disabled for testing
-		/*if (args.length != 4) {
-			System.out.println("Expects 3 arguments: nodes model filename, edges model filename, and hurricanes model filename");
-			return;
-		}
-		String filename = args[1];*/
-		
 		// Hardcoded for testing
 		String arg1 = "models/troy_model/main.csv";
 		String arg2 = "models/troy_model/nodes.csv";
@@ -62,31 +54,25 @@ public class Main {
 		
 		System.out.println("evac");
 		for (Node node : evac) {
-			System.out.println(node.name);
+			System.out.println("  " + node.name);
 		}
 		
 		System.out.println("dest");
 		for (Node node : dest) {
-			System.out.println(node.name);
+			System.out.println("  " + node.name);
+		}
+				
+		String ampl = AmplGenerator.createData(inputModel, evac, dest);
+		
+		File amplDataFile = new File("./ampl/ampl_model.dat");
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(amplDataFile))) {
+			writer.write(ampl);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
-		
-		String ampl = AmplGenerator.createData(inputModel, evac, dest);
+		System.out.println("data output:");
 		System.out.println(ampl);
 		
-		// Start simulation
-		OutputModel outputModel = NumberCruncher.crunch(inputModel);
-		String kml = KmlGenerator.createKml(outputModel);
-		System.out.println(kml);
-
 	}
-	
-	public static void setModelStart(Instant instant) {
-		modelStart = instant;
-	}
-	
-	public static void setModelEnd(Instant instant) {
-		modelEnd = instant;
-	}
-	
 }

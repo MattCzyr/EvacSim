@@ -6,5 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="include/commons-csv-1.7/commons-csv-1.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

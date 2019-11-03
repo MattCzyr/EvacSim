@@ -1,0 +1,7 @@
+Enabled,Source,Destination,Time,Capacity
+0,Troy,Brunswick,20,250
+0,Troy,Guilderland,20,200
+0,Troy,Albany,15,500
+0,Troy,EastGreenbush,30,100
+0,Brunswick,EastGreenbush,10,100
+0,Guilderland,Schenectady,20,100

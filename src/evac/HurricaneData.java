@@ -17,6 +17,7 @@ class HurricaneData {
 	
 	HurricaneData(Position position, Instant time, float wind, float gusts) {
 		this.position = position;
+		this.velocity = velocity;
 		this.time = time;
 		this.wind = wind;
 		this.gusts = gusts;

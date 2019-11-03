@@ -49,6 +49,11 @@ public class Main {
 		System.out.println("Finished translating hurricanes");
 		
 		// TODO: Start simulation
+        //
+		OutputModel outputModel = NumberCruncher.crunch(inputModel);
+		String kml = KmlGenerator.createKml(outputModel);
+		System.out.println(kml);
+
 	}
 	
 	public static void setModelStart(Instant instant) {

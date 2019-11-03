@@ -1,0 +1,7 @@
+model model.mdl;
+
+data example.dat;
+
+solve;
+
+display Flow;

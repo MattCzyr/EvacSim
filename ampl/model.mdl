@@ -1,0 +1,29 @@
+set EVAC;
+set DEST;
+
+set NODES := EVAC union DEST;
+set EDGES within {NODES,NODES};
+
+param population   {EVAC } >= 0;
+param capacity     {DEST } >= 0;
+param edgecapacity {EDGES} >= 0;
+
+var Flow {(a,b) in EDGES} >= 0;
+
+minimize TotalCost:
+    + (sum {(a,b) in EDGES} Flow[a,b])
+;
+
+subject to EvacMaximumCapacity {n in EVAC}:
+    + population[n] # population of city
+    + sum {(a,n) in EDGES} Flow[a,n] # flow into city
+    - sum {(n,b) in EDGES} Flow[n,b] # flow out of city
+    <= 0
+;
+    
+subject to DestMaximumCapacity {n in DEST}:
+    + sum {(a,n) in EDGES} Flow[a,n] # flow into city
+    - sum {(n,b) in EDGES} Flow[n,b] # flow out of city
+    - capacity[n] # capacity of city to take population
+    <= 0
+;

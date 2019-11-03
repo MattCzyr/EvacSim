@@ -6,10 +6,10 @@ class Edge {
 	
 	// TODO: list of positions that can be used to draw roads
 	
-	final float time;
-	final float capacity;
+	final double time;
+	final double capacity;
 	
-	Edge(Node src, Node dst, float time, float capacity) {
+	Edge(Node src, Node dst, double time, double capacity) {
 		this.src = src;
 		this.dst = dst;
 		this.time = time;

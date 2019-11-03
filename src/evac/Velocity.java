@@ -1,10 +1,10 @@
 package evac;
 
 class Velocity {
-	final float inclination;
-	final float speed;
+	final double inclination;
+	final double speed;
 	
-	Velocity(float inclination, float speed) {
+	Velocity(double inclination, double speed) {
 		this.inclination = inclination;
 		this.speed = speed;
 	}

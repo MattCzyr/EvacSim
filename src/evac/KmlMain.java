@@ -17,10 +17,10 @@ import org.apache.commons.csv.CSVRecord;
 public class KmlMain {
 	public static void main(String[] args) {
 		// Hardcoded for testing
-		String arg1 = "models/troy_model/main.csv";
-		String arg2 = "models/troy_model/nodes.csv";
-		String arg3 = "models/troy_model/edges.csv";
-		String arg4 = "models/troy_model/hurricanes.csv";
+		String arg1 = "models/troy_cloud_model/main.csv";
+		String arg2 = "models/troy_cloud_model/nodes.csv";
+		String arg3 = "models/troy_cloud_model/edges.csv";
+		String arg4 = "models/troy_cloud_model/hurricanes.csv";
 		
 		InputModel inputModel = new InputModel();
 		

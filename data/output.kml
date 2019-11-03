@@ -6,7 +6,7 @@
   <name>Hurricane</name>
 <Placemark>
   <name>Danger Zone (level 2)</name>
-  <description>2019-11-03T10:50:48.612926-05:00[America/New_York]</description>
+  <description>2019-11-03T11:32:24.148205-05:00[America/New_York]</description>
   <Polygon>
     <altitudeMode>clampToGround</altitudeMode>
     <outerBoundaryIs><LinearRing><coordinates>
@@ -21,7 +21,7 @@
 </Placemark>
 <Placemark>
   <name>Danger Zone (level 3)</name>
-  <description>2019-11-03T10:50:48.612933-05:00[America/New_York]</description>
+  <description>2019-11-03T11:32:24.148211-05:00[America/New_York]</description>
   <Polygon>
     <altitudeMode>clampToGround</altitudeMode>
     <outerBoundaryIs><LinearRing><coordinates>

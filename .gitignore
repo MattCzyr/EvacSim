@@ -1,3 +1,5 @@
+models/troy_cloud_model/*
+
 .metadata/
 bin/
 tmp/

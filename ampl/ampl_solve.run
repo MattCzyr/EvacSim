@@ -1,7 +1,0 @@
-model model.mdl;
-
-data ampl_model.dat;
-
-solve;
-
-display Flow;

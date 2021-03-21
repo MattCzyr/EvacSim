@@ -47,4 +47,4 @@ class EvacSim:
 
         print("loading main from " + self.args['main'])
         with open("models/"+self.args['main'], mode='r') as csv_file:
-            csv_main = csv.DictReader(main_file)
+            csv_main = csv.DictReader(csv_file)

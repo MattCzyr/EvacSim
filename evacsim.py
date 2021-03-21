@@ -1,11 +1,12 @@
 import argparse
 import parser
+import csv
 
-class EvacSim(object):
+class EvacSim:
 
     def __init__(self):
         self.args = []
-        self.parse_args(self.init_args())
+        # self.parse_args(self.init_args())
     
     def init_args(self):
         """Creates an argument parser, adds arguments, and returns the parser"""
@@ -30,4 +31,20 @@ class EvacSim(object):
     
     def load_models(self):
         """Loads the models from the file names in the arguments"""
-        # TODO
+        print("loading nodes from " + self.args['nodes'])
+        with open("models/"+self.args['nodes'], mode='r') as csv_file:
+            csv_nodes = csv.DictReader(csv_file)
+
+
+        print("loading edges from " + self.args['edges'])
+        with open("models/"+self.args['edges'], mode='r') as csv_file:
+            csv_edges = csv.DictReader(csv_file)
+ 
+
+        print("loading disaster from " + self.args['disaster'])
+        with open("models/"+self.args['disaster'], mode='r') as csv_file:
+            csv_disaster = csv.DictReader(csv_file)
+
+        print("loading main from " + self.args['main'])
+        with open("models/"+self.args['main'], mode='r') as csv_file:
+            csv_main = csv.DictReader(main_file)

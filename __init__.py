@@ -1,3 +1,3 @@
 import evacsim
 
-app = evacsim.EvacSim()
+ev = EvacSim()

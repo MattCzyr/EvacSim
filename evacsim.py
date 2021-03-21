@@ -5,7 +5,7 @@ import csv
 class EvacSim:
 
     def __init__(self):
-        self.args = []
+        self.args = {}
         # self.parse_args(self.init_args())
     
     def init_args(self):

@@ -36,17 +36,19 @@ class EvacSim:
         print()
         path = "models\\troy_model\\"
         with open(path + self.args['nodes'] , mode='r') as csv_file:
-            self.csv_nodes = csv.DictReader(csv_file)
-        
+            self.nodes_data = csv.DictReader(csv_file)
+            for line in self.nodes_data:
+                print(line)
+
         print("loading edges from " + self.args['edges'])
         with open(path+self.args['edges'], mode='r') as csv_file:
-            self.csv_edges = csv.DictReader(csv_file)
+            self.edges_data = csv.DictReader(csv_file)
  
 
         print("loading disaster from " + self.args['disaster'])
         with open(path+self.args['disaster'], mode='r') as csv_file:
-            self.csv_disaster = csv.DictReader(csv_file)
+            self.disaster_data = csv.DictReader(csv_file)
 
         print("loading main from " + self.args['main'])
         with open(path+self.args['main'], mode='r') as csv_file:
-           self.csv_main = csv.DictReader(csv_file)
+           self.main_data = csv.DictReader(csv_file)

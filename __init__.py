@@ -1,4 +1,6 @@
-from evacsim import evacsim
+from evacsim import EvacSim
 
-ev = evacsim.EvacSim()
-print(ev)
+ev = EvacSim()
+print(ev.args)
+ev.load_models()
+print(ev.csv_disaster)

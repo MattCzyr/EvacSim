@@ -1,3 +1,4 @@
-import evacsim
+from evacsim import evacsim
 
-ev = EvacSim()
+ev = evacsim.EvacSim()
+print(ev)

@@ -6,7 +6,7 @@ import os
 class EvacSim:
 
     def __init__(self):
-        self.args = {}
+        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'main': 'main.csv'}
         self.parse_args(self.init_args())
     
     def init_args(self):

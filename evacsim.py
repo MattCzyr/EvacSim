@@ -6,7 +6,7 @@ import os
 class EvacSim:
 
     def __init__(self):
-        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'main': 'main.csv'}
+        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'main': 'main.csv', 'dir': 'models/troy_model/'}
         self.parse_args(self.init_args())
     
     def init_args(self):
@@ -16,6 +16,7 @@ class EvacSim:
         parser.add_argument('--edges', '-e', help='Specify edges model file name')
         parser.add_argument('--disaster', '-d', help='Specify disaster model file name')
         parser.add_argument('--main', '-m', help='Specify main model file name')
+        parser.add_argument('--dir', help='Specify directory to read models from')
         return parser
     
     def parse_args(self, parser):
@@ -29,30 +30,31 @@ class EvacSim:
             self.args['disaster'] = args.disaster
         if args.main:
             self.args['main'] = args.main
+        if args.dir:
+            self.args['dir'] = args.dir
     
     def load_models(self):
         """Loads the models from the file names in the arguments"""
         print("loading nodes from " + self.args['nodes'])
         print()
-        path = "models\\troy_model\\"
-        with open(path + self.args['nodes'] , mode='r') as csv_file:
+        with open(self.args['dir'] + self.args['nodes'] , mode='r') as csv_file:
             csv_data = csv.DictReader(csv_file)
             for line in csv_data:
                 print(line)
 
         print("loading edges from " + self.args['edges'])
-        with open(path+self.args['edges'], mode='r') as csv_file:
+        with open(self.args['dir'] + self.args['edges'], mode='r') as csv_file:
             csv_data = csv.DictReader(csv_file)
             for line in csv_data:
                 print(line)
 
         print("loading disaster from " + self.args['disaster'])
-        with open(path+self.args['disaster'], mode='r') as csv_file:
+        with open(self.args['dir'] + self.args['disaster'], mode='r') as csv_file:
             csv_data = csv.DictReader(csv_file)
             for line in csv_data:
                 print(line)
         print("loading main from " + self.args['main'])
-        with open(path+self.args['main'], mode='r') as csv_file:
+        with open(self.args['dir'] + self.args['main'], mode='r') as csv_file:
             csv_data = csv.DictReader(csv_file)
             for line in csv_data:
                 print(line)

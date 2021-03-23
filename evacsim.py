@@ -2,12 +2,18 @@ import argparse
 import parser
 import csv
 import os
+import node
+import edge
+import disaster
+import polygon
 
 class EvacSim:
 
     def __init__(self):
         self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'main': 'main.csv', 'dir': 'models/troy_model/'}
-        self.parse_args(self.init_args())
+        self.nodes = {}
+        self.edges = []
+        self.disaster = None
     
     def init_args(self):
         """Creates an argument parser, adds arguments, and returns the parser"""
@@ -35,26 +41,37 @@ class EvacSim:
     
     def load_models(self):
         """Loads the models from the file names in the arguments"""
-        print("loading nodes from " + self.args['nodes'])
-        print()
+        print('Loading nodes from ' + self.args['nodes'] + '...')
         with open(self.args['dir'] + self.args['nodes'] , mode='r') as csv_file:
-            csv_data = csv.DictReader(csv_file)
-            for line in csv_data:
-                print(line)
+            data = csv.DictReader(csv_file)
+            for row in data:
+                if int(row['Enabled']) != 0:
+                    continue
+                self.nodes[row['Name']] = node.Node(row['Name'], row['Latitude'], row['Longitude'], row['Population'], row['Capacity'])
 
-        print("loading edges from " + self.args['edges'])
+        print('Loading edges from ' + self.args['edges'] + '...')
         with open(self.args['dir'] + self.args['edges'], mode='r') as csv_file:
-            csv_data = csv.DictReader(csv_file)
-            for line in csv_data:
-                print(line)
+            data = csv.DictReader(csv_file)
+            for row in data:
+                if int(row['Enabled']) != 0:
+                    continue
+                self.edges.append(edge.Edge(self.nodes[row['Source']], self.nodes[row['Destination']], row['Time'], 0, row['Capacity']))
 
-        print("loading disaster from " + self.args['disaster'])
+        print('Loading disaster from ' + self.args['disaster'] + '...')
         with open(self.args['dir'] + self.args['disaster'], mode='r') as csv_file:
-            csv_data = csv.DictReader(csv_file)
-            for line in csv_data:
-                print(line)
-        print("loading main from " + self.args['main'])
+            data = csv.DictReader(csv_file)
+            disaster_created = False
+            for row in data:
+                if int(row['Enabled']) != 0:
+                    continue
+                if not disaster_created:
+                    self.disaster = disaster.Disaster(row['Name'])
+                    disaster_created = True
+                self.disaster.add_data(disaster.Disaster.Data(row['Time'], polygon.Polygon(row['Latitude1'], row['Longitude1'], row['Latitude2'], row['Longitude2'], row['Latitude3'], row['Longitude3'], row['Latitude4'], row['Longitude4'])))
+        
+        print('Loading main from ' + self.args['main'] + '...')
         with open(self.args['dir'] + self.args['main'], mode='r') as csv_file:
-            csv_data = csv.DictReader(csv_file)
-            for line in csv_data:
-                print(line)
+            data = csv.DictReader(csv_file)
+            for row in data:
+                if int(row['Enabled']) != 0:
+                    continue

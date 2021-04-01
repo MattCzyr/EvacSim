@@ -1,17 +1,24 @@
 # EvacSim
 
 EvacSim is a deterministic simulation that uses graph theory and linear
-programming to model the effects of hurricanes on communities in order to
-predict optimal evacuation routes. This project was originally developed for
+programming to model the effects of natural disasters on communities in order
+to find optimal evacuation routes. This project was originally developed for
 HackRPI 2019, a 24-hour hackathon in which it won 2nd place.
 
 ## Background
 
 This project was originally developed for HackRPI 2019, a 24-hour hackathon in
-which it won 2nd place. The idea was born after witnessing the devastating
-effects of Hurricane Dorian as well as hearing from friends and family in
-tropical regions who were forced to evacuate their homes due to storms numerous
-times over the years.
+which it won 2nd place. It used Java for model translation and representation,
+AMPL to run the flow algorithm, and Node to hold the whole thing together.
+This has since been replaced entirely by Python.
+
+The idea for the project was born after witnessing the devastating effects of
+Hurricane Dorian as well as hearing from friends and family in tropical regions
+who were forced to evacuate their homes due to storms numerous times over the
+years. As such, the application was initially only able to simulate hurricanes.
+This has since been replaced by a generic natural disaster representation,
+modeled by polygons corresponding to the disaster's area of effect at different
+times.
 
 ## How it works
 
@@ -31,41 +38,39 @@ following `nodes.csv` file modeling populations around Troy, NY:
 | 0       | Brunswick     | 42.732   | -73.562   | 16000      | 35000    |
 | 0       | Schenectady   | 42.806   | -73.943   | 65000      | 70000    |
 
-Similar models exist for edges, hurricanes, and the main setup:
+Similar models exist for edges and natural disasters:
 - `edges.csv`: Models infrastructure (ie. roads) between populations by source
   node, destination node, transit time, and maximum capacity.
-- `hurricanes.csv`: Models the hurricane by initial position, wind speed
-  variation, velocity, and trajectory.
-- `main.csv`: Models the start and end time for the simulation.
+- `disaster.csv`: Models the natural disaster by its area of effect at
+  different times.
 
 Examples can be found in the [models](../models/) folder.
 
 ### Simulation
 
-The simulation has three main parts: the simulator itself, which is written in
-Java, the AMPL model,  and the boilerplate script, which is written in
-JavaScript with Node.js. The script first fetches the model files from where
-they are stored in the IBM cloud. The files are then passed to the simulator,
-which translates the model files to usable data. From the hurricane data, the
-path and area of effect of the storm is determined, which is then used to
-determine which populations should evacuate. The data for edges, nodes, and
-affected nodes are then passed to an AMPL model which runs a minimum flow
-algorithm on the graph to determine where each affected population can evacuate
-to without violating maximum capacities on communities and infrastructure. This
-data is passed back to the Java simulation, which generates a KML file showing
-the area of effect of the hurricane, the severity in each region, the evacuation
-routes for each affected community, and data such as the final populations in
-each community. This KML file can be displayed in a geographic browser such as
-Google Earth.
+Once the models have been read, an algorithm is run on each city within the
+natural disaster's area of effect. This algorithm is similar to a minimum-cost
+flow algorithm: it aims to find an evacuation route each at-risk community can
+take to reach a safe city in the least amount of time, without violating
+constraints like maximum capacities on cities and infrastructure.
 
-## What's next
+### Results
 
-Some possibilities for extensions of the project include:
-- Supporting multiple types of natural disasters, such as earthquakes and
-  wildfires
-- Improving the accuracy of hurricane representations by allowing for varying
-  velocities and trajectories
-- Using IBM Cloud services more extensively
-- Creating a custom frontend to display evacuation routes rather than
-  generating KML files
+After running the simulation, the results can be exported to a KML file. This
+file can be viewed in an Earth browser such as Google Earth, where the cities,
+infrastructure, natural disaster, and evacuation routes can be explored, as
+well as their supporting data.
+
+## Setting up
+
+1. Install Python 3 through the [installer](https://www.python.org/downloads/)
+   or through a package manager like Brew or APT depending on your OS
+2. Install the virtualenv package with `pip3 install virtualenv`
+3. Create a new virtual environment with `python3 -m virtualenv .venv`
+4. Activate the virtual environment with `source .venv/bin/activate` on
+   macOS/Linux or `.venv\Scripts\activate` on Windows
+5. Install the project's dependencies with `pip3 install -r requirements.txt`
+6. You can now run the application with `python3 evacsim/__init__.py`,
+   specifying arguments as necessary
+7. When you're finished, deactivate the virtual environment with `deactivate`
 

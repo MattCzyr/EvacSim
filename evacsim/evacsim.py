@@ -6,6 +6,7 @@ import node
 import edge
 import disaster
 import polygon
+import exporter
 
 class EvacSim:
 
@@ -14,6 +15,7 @@ class EvacSim:
         self.nodes = {}
         self.edges = []
         self.disaster = None
+        self.routes = []
     
     def init_args(self):
         """Creates an argument parser, adds arguments, and returns the parser"""
@@ -65,4 +67,8 @@ class EvacSim:
                     self.disaster = disaster.Disaster(row['Name'])
                     disaster_created = True
                 self.disaster.add_data(disaster.Disaster.Data(row['Time'], polygon.Polygon(row['Latitude1'], row['Longitude1'], row['Latitude2'], row['Longitude2'], row['Latitude3'], row['Longitude3'], row['Latitude4'], row['Longitude4'])))
-
+    
+    def export_kml(self):
+        """Exports the models to a KML file"""
+        exp = exporter.Exporter(self.nodes, self.edges, self.disaster, self.routes)
+        exp.export_kml()

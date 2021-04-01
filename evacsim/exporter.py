@@ -27,5 +27,15 @@ class Exporter:
         for datum in self.disaster.data:
             kml.newpolygon(name=self.disaster.name, description=f'Time: {str(datum.time)}', outerboundaryis=[(datum.effect.lng1, datum.effect.lat1), (datum.effect.lng2, datum.effect.lat2), (datum.effect.lng3, datum.effect.lat3), (datum.effect.lng4, datum.effect.lat4)])
         
+        # Add evacuation routes to KML
+        for route in self.routes:
+            # Get the coordinates for each node in the path
+            path_coords = [edge.source for edge in route.path]
+            path_coords.append(route.path[-1])
+
+            # Create and style linestring for this route
+            route_line = kml.newlinestring(name=f'Evacuation route from {route.getSource()} to {route.getDest()}', description=f'Total Travel Time: {route.getTotalTravelTime()}', coords=path_coords)
+            route_line.style.linestyle.color = simplekml.Color.red
+
         # Export KML file
         kml.save(self.filename)

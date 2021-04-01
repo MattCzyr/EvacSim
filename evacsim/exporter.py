@@ -2,11 +2,12 @@ import simplekml
 
 class Exporter:
 
-    def __init__(self, nodes, edges, disaster, routes):
+    def __init__(self, nodes, edges, disaster, routes, filename):
         self.nodes = nodes
         self.edges = edges
         self.disaster = disaster
         self.routes = routes
+        self.filename = filename
     
     def export_kml(self):
         """Exports the nodes (cities), edges (infrastructure), disaster data, and evacuation routes to a KML file"""
@@ -27,4 +28,4 @@ class Exporter:
             kml.newpolygon(name=self.disaster.name, description=str(datum.time), outerboundaryis=[(datum.effect.lng1, datum.effect.lat1), (datum.effect.lng2, datum.effect.lat2), (datum.effect.lng3, datum.effect.lat3), (datum.effect.lng4, datum.effect.lat4)])
         
         # Export KML file
-        kml.save('export.kml')
+        kml.save(self.filename)

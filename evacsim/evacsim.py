@@ -11,7 +11,7 @@ import exporter
 class EvacSim:
 
     def __init__(self):
-        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/'}
+        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml'}
         self.nodes = {}
         self.edges = []
         self.disaster = None
@@ -24,6 +24,7 @@ class EvacSim:
         parser.add_argument('--edges', '-e', help='Specify edges model file name')
         parser.add_argument('--disaster', '-d', help='Specify disaster model file name')
         parser.add_argument('--dir', help='Specify directory to read models from')
+        parser.add_argument('--export', help='Specify a filename for the exported KML data')
         return parser
     
     def parse_args(self, parser):
@@ -37,6 +38,8 @@ class EvacSim:
             self.args['disaster'] = args.disaster
         if args.dir:
             self.args['dir'] = args.dir
+        if args.export:
+            self.args['export'] = args.export
     
     def load_models(self):
         """Loads the models from the file names in the arguments"""
@@ -70,5 +73,6 @@ class EvacSim:
     
     def export_kml(self):
         """Exports the models to a KML file"""
-        exp = exporter.Exporter(self.nodes, self.edges, self.disaster, self.routes)
+        print('Exporting models to ' + self.args['export'] + '...')
+        exp = exporter.Exporter(self.nodes, self.edges, self.disaster, self.routes, self.args['export'])
         exp.export_kml()

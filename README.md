@@ -29,14 +29,15 @@ between them are represented by edges. These nodes and edges can then be used
 to construct a graph. The actual modeling happens in CSV files, such as the
 following `nodes.csv` file modeling populations around Troy, NY:
 
-| Enabled | Name          | Latitude | Longitude | Population | Capacity |
-| ------- | ------------- | -------- | --------- | ---------- | -------- |
-| 0       | Troy          | 42.718   | -73.687   | 50000      | 60000    |
-| 0       | Albany        | 42.649   | -73.753   | 98000      | 120000   |
-| 0       | Guilderland   | 42.702   | -73.909   | 36000      | 50000    |
-| 0       | EastGreenbush | 42.588   | -73.703   | 16000      | 30000    |
-| 0       | Brunswick     | 42.732   | -73.562   | 16000      | 35000    |
-| 0       | Schenectady   | 42.806   | -73.943   | 65000      | 70000    |
+| Enabled | Name           | Latitude | Longitude | Population | Capacity |
+| ------- | -------------- | -------- | --------- | ---------- | -------- |
+| 0       | Troy           | 42.718   | -73.687   | 50000      | 60000    |
+| 0       | Albany         | 42.649   | -73.753   | 100000     | 125000   |
+| 0       | Guilderland    | 42.702   | -73.909   | 35000      | 50000    |
+| 0       | East Greenbush | 42.588   | -73.703   | 15000      | 20000    |
+| 0       | Brunswick      | 42.732   | -73.562   | 15000      | 30000    |
+| 0       | Schenectady    | 42.806   | -73.943   | 65000      | 80000    |
+| 0       | Latham         | 42.748   | -73.761   | 20000      | 30000    |
 
 Similar models exist for edges and natural disasters:
 - `edges.csv`: Models infrastructure (ie. roads) between populations by source

@@ -81,8 +81,24 @@ class EvacSim:
                     break
         return affected_nodes
 
+    def generate_evacuation_routes(self):
+        """Runs a minimum cost flow algorithm on each city within the natural disaster's area of effect to generate an evacuation route"""
+        for affected_node in self.get_affected_nodes():
+            for connected_node in self.get_connected_nodes(affected_node):
+                pass
+
     def export_kml(self):
         """Exports the models to a KML file"""
         print('Exporting models to ' + self.args['export'] + '...')
         exp = exporter.Exporter(self.nodes, self.edges, self.disaster, self.routes, self.args['export'])
         exp.export_kml()
+    
+    def get_connected_nodes(self, node):
+        """Returns all nodes connected to the given node"""
+        connected_nodes = []
+        for edge in self.edges:
+            if edge.source == node:
+                connected_edges.append(edge.dest)
+            elif edge.dest == node:
+                connected_edges.append(edge.source)
+        return connected_edges

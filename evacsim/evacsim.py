@@ -49,7 +49,7 @@ class EvacSim:
             for row in data:
                 if int(row['Enabled']) != 0:
                     continue
-                self.nodes[row['Name']] = node.Node(row['Name'], row['Latitude'], row['Longitude'], row['Population'], row['Capacity'])
+                self.nodes[row['Name']] = node.Node(row['Name'], float(row['Latitude']), float(row['Longitude']), row['Population'], row['Capacity'])
 
         print('Loading edges from ' + self.args['edges'] + '...')
         with open(self.args['dir'] + self.args['edges'], mode='r') as csv_file:
@@ -69,8 +69,18 @@ class EvacSim:
                 if not disaster_created:
                     self.disaster = disaster.Disaster(row['Name'])
                     disaster_created = True
-                self.disaster.add_data(disaster.Disaster.Data(row['Time'], polygon.Polygon(row['Latitude1'], row['Longitude1'], row['Latitude2'], row['Longitude2'], row['Latitude3'], row['Longitude3'], row['Latitude4'], row['Longitude4'])))
+                self.disaster.add_data(disaster.Disaster.Data(row['Time'], polygon.Polygon(float(row['Latitude1']), float(row['Longitude1']), float(row['Latitude2']), float(row['Longitude2']), float(row['Latitude3']), float(row['Longitude3']), float(row['Latitude4']), float(row['Longitude4']))))
     
+    def get_affected_nodes(self):
+        """Finds all nodes within the natural disaster's area of effect"""
+        affected_nodes = []
+        for node in self.nodes.values():
+            for data in self.disaster.data:
+                if data.effect.contains(node.lat, node.lng):
+                    affected_nodes.append(node)
+                    break
+        return affected_nodes
+
     def export_kml(self):
         """Exports the models to a KML file"""
         print('Exporting models to ' + self.args['export'] + '...')

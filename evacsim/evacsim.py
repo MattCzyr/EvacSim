@@ -10,6 +10,7 @@ import exporter
 
 class EvacSim:
 
+    # Declares default arguments and default directories, to allow for easier execution.
     def __init__(self):
         self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml'}
         self.nodes = {}
@@ -17,6 +18,7 @@ class EvacSim:
         self.disaster = None
         self.routes = []
     
+    # Adds arguments accordingly if provided in the command line 
     def init_args(self):
         """Creates an argument parser, adds arguments, and returns the parser"""
         parser = argparse.ArgumentParser(description='EvacSim')
@@ -49,6 +51,7 @@ class EvacSim:
             for row in data:
                 if int(row['Enabled']) != 0:
                     continue
+                # pushes each row back into the Node class Object collection
                 self.nodes[row['Name']] = node.Node(row['Name'], row['Latitude'], row['Longitude'], row['Population'], row['Capacity'])
 
         print('Loading edges from ' + self.args['edges'] + '...')
@@ -57,6 +60,7 @@ class EvacSim:
             for row in data:
                 if int(row['Enabled']) != 0:
                     continue
+                # pushes each row back into the Edges class Object collection
                 self.edges.append(edge.Edge(self.nodes[row['Source']], self.nodes[row['Destination']], row['Time'], 0, row['Capacity']))
 
         print('Loading disaster from ' + self.args['disaster'] + '...')
@@ -66,13 +70,15 @@ class EvacSim:
             for row in data:
                 if int(row['Enabled']) != 0:
                     continue
+                # Creates a new disaster object if one has not yet been created
                 if not disaster_created:
                     self.disaster = disaster.Disaster(row['Name'])
                     disaster_created = True
+                # pushes each row back into the Disaster class Object collection
                 self.disaster.add_data(disaster.Disaster.Data(row['Time'], polygon.Polygon(row['Latitude1'], row['Longitude1'], row['Latitude2'], row['Longitude2'], row['Latitude3'], row['Longitude3'], row['Latitude4'], row['Longitude4'])))
     
     def export_kml(self):
-        """Exports the models to a KML file"""
+        """Exports the models to a KML file, allowing us to export geographic data to Google Earth and Google Maps, and display it accordingly"""
         print('Exporting models to ' + self.args['export'] + '...')
         exp = exporter.Exporter(self.nodes, self.edges, self.disaster, self.routes, self.args['export'])
         exp.export_kml()

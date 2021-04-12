@@ -1,5 +1,7 @@
 from evacsim import EvacSim
 
+# Instantiates a new EvacSim object, and parses the given cmdline arguments (or uses default if left blank).
+# Models are then loaded from provided arguments or defaults, and exported accordingly to .KML files.
 ev = EvacSim()
 ev.parse_args(ev.init_args())
 ev.load_models()

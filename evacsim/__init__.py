@@ -6,5 +6,5 @@ ev.load_models()
 ev.export_kml()
 
 # Example usage from the root directory:
-# python evacsim/__init__.py --nodes nodes.csv --edges edges.csv --disaster disaster.csv --dir troy_model --export export.kml
+# python evacsim/__init__.py --nodes nodes.csv --edges edges.csv --disaster disaster.csv --dir models/troy_model/ --export export.kml
 # These arguments can be omitted to use the default values.

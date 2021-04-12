@@ -12,7 +12,7 @@ class EvacSim:
 
     # Declares default arguments and default directories, to allow for easier execution.
     def __init__(self):
-        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml'}
+        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml','run':False}
         self.nodes = {}
         self.edges = []
         self.disaster = None
@@ -27,6 +27,7 @@ class EvacSim:
         parser.add_argument('--disaster', '-d', help='Specify disaster model file name')
         parser.add_argument('--dir', help='Specify directory to read models from')
         parser.add_argument('--export', help='Specify a filename for the exported KML data')
+        parser.add_argument('--run', help='Choose whether or not to autorun exported KML file (provided Google Earth is installed)')
         return parser
     
     def parse_args(self, parser):
@@ -42,6 +43,8 @@ class EvacSim:
             self.args['dir'] = args.dir
         if args.export:
             self.args['export'] = args.export
+        if args.run:
+            self.args['run'] = args.run
     
     def load_models(self):
         """Loads the models from the file names in the arguments"""

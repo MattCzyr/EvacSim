@@ -94,11 +94,12 @@ class EvacSim:
     def evacuation_route_helper(self, node, affected_node, prev_node, relative_nodes, visited_nodes, current_route, evac_routes):
         visited_nodes.append(node)
         for edge in self.get_connected_edges(node):
-            current_route.append(edge)
+            new_route = copy.deepcopy(current_route)
+            new_route.append(edge)
             other_node = edge.source
             if edge.source == node:
                 other_node = edge.dest
-            if prev_node != None and other_node.name == prev_node.name:
+            if prev_node is not None and other_node == prev_node:
                 continue
             if other_node not in self.get_affected_nodes() and relative_nodes[other_node.name].population < relative_nodes[other_node.name].capacity:
                 # Sanity check
@@ -109,14 +110,14 @@ class EvacSim:
                     prev_population = relative_nodes[affected_node.name].population
                     relative_nodes[other_node.name].population += relative_nodes[affected_node.name].population
                     relative_nodes[affected_node.name].population = 0
-                    evac_routes.append(route.Route(current_route, affected_node, other_node, prev_population))
+                    evac_routes.append(route.Route(new_route, affected_node, other_node, prev_population))
                 else:
                     relative_nodes[other_node.name].population += transferable_population
                     relative_nodes[affected_node.name].population -= transferable_population
-                    evac_routes.append(route.Route(current_route, affected_node, other_node, transferable_population))
+                    evac_routes.append(route.Route(new_route, affected_node, other_node, transferable_population))
             if relative_nodes[affected_node.name].population > 0:
                 if other_node not in visited_nodes:
-                    self.evacuation_route_helper(other_node, affected_node, node, relative_nodes, visited_nodes, current_route, evac_routes)
+                    self.evacuation_route_helper(other_node, affected_node, node, relative_nodes, visited_nodes, new_route, evac_routes)
 
     def export_kml(self):
         """Exports the models to a KML file"""

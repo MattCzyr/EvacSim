@@ -7,8 +7,18 @@ class Disaster:
     def add_data(self, data):
         self.data.append(data)
 
+    def __str__(self):
+        ret = f'Disaster; name = {self.name}; data = [ '
+        for datum in self.data:
+            ret += datum + '; '
+        ret += ']'
+        return ret
+
     class Data:
         
         def __init__(self, time, effect):
             self.time = time
             self.effect = effect
+        
+        def __str__(self):
+            return f'Data; time = {self.time}; effect = {self.effect}'

@@ -11,3 +11,13 @@ class Route:
         for edge in source.path:
             totalTravelTime += edge.travelTime
         return totalTravelTime
+
+    def __str__(self):
+        ret = f'Evac Route: travelers = {self.travelers}; path = {self.source.name}'
+        prev_node = self.source
+        for edge in self.path:
+            other_node = edge.source
+            if other_node == prev_node:
+                other_node = edge.dest
+            ret += f' -> {other_node.name}'
+        return ret

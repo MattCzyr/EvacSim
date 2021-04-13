@@ -20,4 +20,5 @@ class Route:
             if other_node == prev_node:
                 other_node = edge.dest
             ret += f' -> {other_node.name}'
+            prev_node = other_node
         return ret

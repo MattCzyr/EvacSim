@@ -9,3 +9,6 @@ class Node:
 
     def __str__(self):
         return f'Node; name = {self.name}; lat = {self.lat}; lng = {self.lng}; population = {self.population}; capacity = {self.capacity}'
+
+    def __eq__(self, other):
+        return self.name == other.name

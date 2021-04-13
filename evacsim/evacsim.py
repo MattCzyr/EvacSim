@@ -6,7 +6,9 @@ import node
 import edge
 import disaster
 import polygon
+import route
 import exporter
+import copy
 
 class EvacSim:
 
@@ -49,7 +51,7 @@ class EvacSim:
             for row in data:
                 if int(row['Enabled']) != 0:
                     continue
-                self.nodes[row['Name']] = node.Node(row['Name'], float(row['Latitude']), float(row['Longitude']), row['Population'], row['Capacity'])
+                self.nodes[row['Name']] = node.Node(row['Name'], float(row['Latitude']), float(row['Longitude']), int(row['Population']), int(row['Capacity']))
 
         print('Loading edges from ' + self.args['edges'] + '...')
         with open(self.args['dir'] + self.args['edges'], mode='r') as csv_file:
@@ -83,9 +85,38 @@ class EvacSim:
 
     def generate_evacuation_routes(self):
         """Runs a minimum cost flow algorithm on each city within the natural disaster's area of effect to generate an evacuation route"""
-        for affected_node in self.get_affected_nodes():
-            for connected_node in self.get_connected_nodes(affected_node):
-                pass
+        affected_nodes = self.get_affected_nodes()
+        relative_nodes = copy.deepcopy(self.nodes)
+        evac_routes = []
+        for affected_node in affected_nodes:
+            self.evacuation_route_helper(affected_node, affected_node, None, relative_nodes, [], [], evac_routes)
+                
+    def evacuation_route_helper(self, node, affected_node, prev_node, relative_nodes, visited_nodes, current_route, evac_routes):
+        visited_nodes.append(node)
+        for edge in self.get_connected_edges(node):
+            current_route.append(edge)
+            other_node = edge.source
+            if edge.source == node:
+                other_node = edge.dest
+            if prev_node != None and other_node.name == prev_node.name:
+                continue
+            if other_node not in self.get_affected_nodes() and relative_nodes[other_node.name].population < relative_nodes[other_node.name].capacity:
+                # Sanity check
+                if relative_nodes[affected_node.name].population == 0:
+                    return
+                transferable_population = relative_nodes[other_node.name].capacity - relative_nodes[other_node.name].population
+                if relative_nodes[affected_node.name].population < transferable_population:
+                    prev_population = relative_nodes[affected_node.name].population
+                    relative_nodes[other_node.name].population += relative_nodes[affected_node.name].population
+                    relative_nodes[affected_node.name].population = 0
+                    evac_routes.append(route.Route(current_route, affected_node, other_node, prev_population))
+                else:
+                    relative_nodes[other_node.name].population += transferable_population
+                    relative_nodes[affected_node.name].population -= transferable_population
+                    evac_routes.append(route.Route(current_route, affected_node, other_node, transferable_population))
+            if relative_nodes[affected_node.name].population > 0:
+                if other_node not in visited_nodes:
+                    self.evacuation_route_helper(other_node, affected_node, node, relative_nodes, visited_nodes, current_route, evac_routes)
 
     def export_kml(self):
         """Exports the models to a KML file"""
@@ -93,12 +124,10 @@ class EvacSim:
         exp = exporter.Exporter(self.nodes, self.edges, self.disaster, self.routes, self.args['export'])
         exp.export_kml()
     
-    def get_connected_nodes(self, node):
-        """Returns all nodes connected to the given node"""
-        connected_nodes = []
+    def get_connected_edges(self, node):
+        """Returns all edges connected to the given node"""
+        connected_edges = []
         for edge in self.edges:
-            if edge.source == node:
-                connected_edges.append(edge.dest)
-            elif edge.dest == node:
-                connected_edges.append(edge.source)
+            if edge.source == node or edge.dest == node:
+                connected_edges.append(edge)
         return connected_edges

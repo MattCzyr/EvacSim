@@ -1,13 +1,10 @@
 class Route:
 
-    def __init__(self, source, path, dest):
+    def __init__(self, path, source, dest, travelers):
         self.path = path
-    
-    def getSource(self):
-        return self.path[0].source
-    
-    def getDest(self):
-        return self.path[-1].dest
+        self.source = source
+        self.dest = dest
+        self.travelers = travelers
 
     def getTotalTravelTime(self):
         totalTravelTime = 0

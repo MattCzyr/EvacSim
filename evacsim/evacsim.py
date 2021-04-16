@@ -59,7 +59,7 @@ class EvacSim:
             for row in data:
                 if int(row['Enabled']) != 0:
                     continue
-                self.edges.append(edge.Edge(self.nodes[row['Source']], self.nodes[row['Destination']], row['Time'], 0, row['Capacity']))
+                self.edges.append(edge.Edge(self.nodes[row['Source']], self.nodes[row['Destination']], int(row['Time']), 0, row['Capacity']))
 
         print('Loading disaster from ' + self.args['disaster'] + '...')
         with open(self.args['dir'] + self.args['disaster'], mode='r') as csv_file:
@@ -93,9 +93,7 @@ class EvacSim:
         evac_routes = []
         for affected_node in affected_nodes:
             self.generate_evacuation_routes_for_node(affected_node, affected_node, relative_nodes, [], [], evac_routes)
-        for evac_route in evac_routes:
-            print(evac_route)
-        return evac_routes
+        self.routes = evac_routes
                 
     def generate_evacuation_routes_for_node(self, node, affected_node, relative_nodes, visited_nodes, current_route, evac_routes):
         """Recursively generates evacuation routes for the affected node, ensuring that the population capacities

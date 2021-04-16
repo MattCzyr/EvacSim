@@ -12,13 +12,15 @@ import copy
 
 class EvacSim:
 
+    # Declares default arguments and default directories, to allow for easier execution.
     def __init__(self):
-        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml'}
+        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml','run':False}
         self.nodes = {}
         self.edges = []
         self.disaster = None
         self.routes = []
     
+    # Adds arguments accordingly if provided in the command line 
     def init_args(self):
         """Creates an argument parser, adds arguments, and returns the parser"""
         parser = argparse.ArgumentParser(description='EvacSim')
@@ -27,6 +29,7 @@ class EvacSim:
         parser.add_argument('--disaster', '-d', help='Specify disaster model file name')
         parser.add_argument('--dir', help='Specify directory to read models from')
         parser.add_argument('--export', help='Specify a filename for the exported KML data')
+        parser.add_argument('--run', help='Choose whether or not to autorun exported KML file (provided Google Earth is installed)')
         return parser
     
     def parse_args(self, parser):
@@ -42,6 +45,8 @@ class EvacSim:
             self.args['dir'] = args.dir
         if args.export:
             self.args['export'] = args.export
+        if args.run:
+            self.args['run'] = args.run
     
     def load_models(self):
         """Loads the models from the file names in the arguments"""
@@ -68,6 +73,7 @@ class EvacSim:
             for row in data:
                 if int(row['Enabled']) != 0:
                     continue
+                # Creates a new disaster object if one has not yet been created
                 if not disaster_created:
                     self.disaster = disaster.Disaster(row['Name'])
                     disaster_created = True
@@ -134,7 +140,7 @@ class EvacSim:
                 self.generate_evacuation_routes_for_node(other_node, affected_node, relative_nodes, visited_nodes, new_route, evac_routes)
 
     def export_kml(self):
-        """Exports the models to a KML file"""
+        """Exports the models to a KML file, allowing us to export geographic data to Google Earth and Google Maps, and display it accordingly"""
         print('Exporting models to ' + self.args['export'] + '...')
         exp = exporter.Exporter(self.nodes, self.edges, self.disaster, self.routes, self.args['export'])
         exp.export_kml()

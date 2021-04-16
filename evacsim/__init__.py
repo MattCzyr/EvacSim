@@ -5,6 +5,7 @@ import os
 ev = EvacSim()
 ev.parse_args(ev.init_args())
 ev.load_models()
+ev.generate_evacuation_routes()
 ev.export_kml()
 # If 'run' arg is true, open exported KML file in Google Earth Pro
 if(ev.args['run']):

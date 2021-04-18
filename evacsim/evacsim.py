@@ -11,7 +11,6 @@ import exporter
 import copy
 
 class EvacSim:
-
     # Declares default arguments and default directories, to allow for easier execution.
     def __init__(self):
         self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml','run':False}

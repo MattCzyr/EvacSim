@@ -28,7 +28,7 @@ class Exporter:
 
         # Add disaster data to KML
         for datum in self.disaster.data:
-            kml.newpolygon(name=self.disaster.name, description=f'Time: {str(datum.time)}', outerboundaryis=[(datum.effect.lng1, datum.effect.lat1), (datum.effect.lng2, datum.effect.lat2), (datum.effect.lng3, datum.effect.lat3), (datum.effect.lng4, datum.effect.lat4)])
+            kml.newpolygon(name=self.disaster.name, description=f'Time: {str(datum.time)}', outerboundaryis=datum.effect.reverseLatLng())
 
         # Add evacuation routes to KML
         for route in self.routes:

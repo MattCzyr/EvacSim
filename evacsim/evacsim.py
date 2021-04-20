@@ -77,7 +77,12 @@ class EvacSim:
                 if not disaster_created:
                     self.disaster = disaster.Disaster(row['Name'])
                     disaster_created = True
-                self.disaster.add_data(disaster.Disaster.Data(row['Time'], polygon.Polygon(float(row['Latitude1']), float(row['Longitude1']), float(row['Latitude2']), float(row['Longitude2']), float(row['Latitude3']), float(row['Longitude3']), float(row['Latitude4']), float(row['Longitude4']))))
+                index = 1
+                points = []
+                while f'Latitude{index}' in row and f'Longitude{index}' in row:
+                    points.append((float(row[f'Latitude{index}']), float(row[f'Longitude{index}'])))
+                    index += 1
+                self.disaster.add_data(disaster.Disaster.Data(row['Time'], polygon.Polygon(points)))
 
     def get_affected_nodes(self):
         """Finds all nodes within the natural disaster's area of effect"""

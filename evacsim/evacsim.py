@@ -1,26 +1,26 @@
 import argparse
-import parser
 import csv
-import os
+import copy
 import node
 import edge
 import disaster
 import polygon
 import route
 import exporter
-import copy
 
 class EvacSim:
+    """
+    Represents the simulation itself, which is responsible for parsing arguments, loading models,
+    running the flow algorithm, and exporting resulting data to a KML file
+    """
 
-    # Declares default arguments and default directories, to allow for easier execution.
     def __init__(self):
         self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml','run':False}
         self.nodes = {}
         self.edges = []
         self.disaster = None
         self.routes = []
-    
-    # Adds arguments accordingly if provided in the command line 
+
     def init_args(self):
         """Creates an argument parser, adds arguments, and returns the parser"""
         parser = argparse.ArgumentParser(description='EvacSim')
@@ -31,7 +31,7 @@ class EvacSim:
         parser.add_argument('--export', help='Specify a filename for the exported KML data')
         parser.add_argument('--run', help='Choose whether or not to autorun exported KML file (provided Google Earth is installed)')
         return parser
-    
+
     def parse_args(self, parser):
         """Parses arguments with the provided parser"""
         args = parser.parse_args()
@@ -47,7 +47,7 @@ class EvacSim:
             self.args['export'] = args.export
         if args.run:
             self.args['run'] = args.run
-    
+
     def load_models(self):
         """Loads the models from the file names in the arguments"""
         print('Loading nodes from ' + self.args['nodes'] + '...')
@@ -78,7 +78,7 @@ class EvacSim:
                     self.disaster = disaster.Disaster(row['Name'])
                     disaster_created = True
                 self.disaster.add_data(disaster.Disaster.Data(row['Time'], polygon.Polygon(float(row['Latitude1']), float(row['Longitude1']), float(row['Latitude2']), float(row['Longitude2']), float(row['Latitude3']), float(row['Longitude3']), float(row['Latitude4']), float(row['Longitude4']))))
-    
+
     def get_affected_nodes(self):
         """Finds all nodes within the natural disaster's area of effect"""
         affected_nodes = []
@@ -100,7 +100,7 @@ class EvacSim:
         for affected_node in affected_nodes:
             self.generate_evacuation_routes_for_node(affected_node, affected_node, relative_nodes, [], [], evac_routes)
         self.routes = evac_routes
-                
+
     def generate_evacuation_routes_for_node(self, node, affected_node, relative_nodes, visited_nodes, current_route, evac_routes):
         """Recursively generates evacuation routes for the affected node, ensuring that the population capacities
            of other nodes are not violated"""
@@ -144,11 +144,11 @@ class EvacSim:
         print('Exporting models to ' + self.args['export'] + '...')
         exp = exporter.Exporter(self.nodes, self.edges, self.disaster, self.routes, self.args['export'])
         exp.export_kml()
-    
+
     def get_connected_edges(self, node):
         """Returns all edges connected to the given node"""
         connected_edges = []
         for edge in self.edges:
-            if edge.source == node or edge.dest == node:
+            if node in (edge.source, edge.dest):
                 connected_edges.append(edge)
         return connected_edges

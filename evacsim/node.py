@@ -1,4 +1,7 @@
 class Node:
+    """
+    Represents a node in the simulation
+    """
 
     def __init__(self, name, lat, lng, population, capacity):
         self.name = name

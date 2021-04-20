@@ -14,6 +14,6 @@ class Polygon:
         shapely_polygon = shapely.geometry.Polygon(self.points)
         return shapely_polygon.contains(shapely.geometry.Point(lat, lng))
 
-    def reverseLatLng(self):
+    def reverse_lat_lng(self):
         """Returns the points in this polygon in longitude/latitude form rather than latitude/longitude form"""
         return [(point[1], point[0]) for point in self.points]

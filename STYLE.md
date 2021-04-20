@@ -8,6 +8,7 @@ additions and exceptions:
 - No requirement for module docstrings
 - No minimum number of public methods in a class
 - No maximum number of method arguments
+- Use single quotes instead of double quotes for strings
 - Use f-strings to format strings whenever possible
 
 Be sure to use PyLint to check adherence to this style guide:

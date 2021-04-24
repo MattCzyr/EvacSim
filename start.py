@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 import sys
-from evacsim import EvacSim
+from evacsim import *
 
 class EvacGui(QMainWindow):
     def __init__(self):
@@ -23,7 +23,8 @@ class EvacGui(QMainWindow):
         self.b1.clicked.connect(self.clicked)
 
     def runSim(self):
-        EvacSim.yo()
+        e = EvacSim()
+        print(e)
         #self.label.setText("button pressed")
         #self.update()
 

@@ -1,5 +1,6 @@
 from evacsim import EvacSim
 import os
+import kml2geojson
 # Instantiates a new EvacSim object, and parses the given cmdline arguments (or uses default if left blank).
 # Models are then loaded from provided arguments or defaults, and exported accordingly to .KML files.
 ev = EvacSim()

@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
         MainWindow.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.runSimulation = QtWidgets.QPushButton(self.centralwidget)
+        self.runSimulation = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.submit())
         self.runSimulation.setGeometry(QtCore.QRect(450, 390, 111, 31))
         self.runSimulation.setObjectName("runSimulation")
         self.title = QtWidgets.QLabel(self.centralwidget)
@@ -99,6 +99,8 @@ class Ui_MainWindow(object):
         self.directoryLabel.setText(_translate("MainWindow", "Select the directory where models are located"))
         self.autorunCheck.setText(_translate("MainWindow", "Open Google Earth Pro on sucessful simulation"))
 
+    def submit(self):
+        self.runSimulation.setText("submitted")
 
 if __name__ == "__main__":
     import sys

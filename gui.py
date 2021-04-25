@@ -110,18 +110,19 @@ class Ui_MainWindow(object):
 
     def edgeBrowseFile(self):
         file = self.openDialog()
-        self.edgesBrowse.setText(os.path.basename(file[0]))
+        self.edgesBrowse.setText(os.path.basename(file))
     def nodeBrowseFile(self):
         file = self.openDialog()
-        self.nodesBrowse.setText(os.path.basename(file[0]))
+        self.nodesBrowse.setText(os.path.basename(file))
     def modelBrowseFile(self):
         file = self.openDialog()
-        self.modelsBrowse.setText(os.path.basename(file[0]))
+        self.modelsBrowse.setText(os.path.basename(file))
+
     def openDialog(self):
-        filename = QFileDialog.getOpenFileName()
+        filename = QFileDialog.getOpenFileName(filter='Comma Seperated Values (*.csv)')
         path = filename[0]
-        print(filename)
-        return filename
+        print(path)
+        return path
 
 if __name__ == "__main__":
     import sys

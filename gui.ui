@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>572</width>
-    <height>434</height>
+    <width>1256</width>
+    <height>884</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,19 +17,6 @@
    <enum>Qt::LeftToRight</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="runSimulation">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>390</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Run Simulation</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="title">
     <property name="geometry">
      <rect>
@@ -46,145 +33,6 @@
     </property>
     <property name="text">
      <string>EvacSim</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="disasterSelection">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>120</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="currentText">
-     <string>Earthquake</string>
-    </property>
-    <item>
-     <property name="text">
-      <string>Earthquake</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Tsunami</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Hurricane</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLabel" name="disasterSelectionLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>110</y>
-      <width>341</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>What type of disaster do you want to simulate?</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="edgesLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>150</y>
-      <width>201</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Select your edges.csv file</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="edgesBrowse">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>160</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Browse</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="nodesBrowse">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>200</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Browse</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="nodesLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>190</y>
-      <width>201</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Select your nodes.csv file</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="modelsBrowse">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>240</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Browse</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="directoryLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>230</y>
-      <width>331</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Select the directory where models are located</string>
     </property>
    </widget>
    <widget class="QLabel" name="icon">
@@ -206,20 +54,36 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="autorunCheck">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>270</y>
-      <width>251</width>
+      <x>1140</x>
+      <y>840</y>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
-    <property name="layoutDirection">
-     <enum>Qt::RightToLeft</enum>
+    <property name="text">
+     <string>Rerun Simulation</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="icon_2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>120</y>
+      <width>1201</width>
+      <height>701</height>
+     </rect>
     </property>
     <property name="text">
-     <string>Open Google Earth Pro on sucessful simulation</string>
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>map.PNG</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

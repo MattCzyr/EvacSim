@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog
+import os
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -98,9 +99,29 @@ class Ui_MainWindow(object):
         self.modelsBrowse.setText(_translate("MainWindow", "Browse"))
         self.directoryLabel.setText(_translate("MainWindow", "Select the directory where models are located"))
         self.autorunCheck.setText(_translate("MainWindow", "Open Google Earth Pro on sucessful simulation"))
+        
+
+        self.edgesBrowse.clicked.connect(self.edgeBrowseFile)
+        self.nodesBrowse.clicked.connect(self.nodeBrowseFile)
+        self.modelsBrowse.clicked.connect(self.modelBrowseFile)
 
     def submit(self):
         self.runSimulation.setText("submitted")
+
+    def edgeBrowseFile(self):
+        file = self.openDialog()
+        self.edgesBrowse.setText(os.path.basename(file[0]))
+    def nodeBrowseFile(self):
+        file = self.openDialog()
+        self.nodesBrowse.setText(os.path.basename(file[0]))
+    def modelBrowseFile(self):
+        file = self.openDialog()
+        self.modelsBrowse.setText(os.path.basename(file[0]))
+    def openDialog(self):
+        filename = QFileDialog.getOpenFileName()
+        path = filename[0]
+        print(filename)
+        return filename
 
 if __name__ == "__main__":
     import sys

@@ -15,17 +15,18 @@ class TestEvacSim(unittest.TestCase):
         """Tests the get_affected_nodes function"""
         ev = evacsim.EvacSim()
         ev.load_models()
-        self.assertEqual(len(ev.get_affected_nodes()), 3)
-
-        ev.disaster.data = []
-        self.assertEqual(len(ev.get_affected_nodes()), 0)
+        for node in ev.nodes:
+            for data in ev.disaster.data:
+                if data.effect.contains(node.lat, node.lng):
+                    self.assertTrue(node in ev.get_affected_nodes())
     
     def test_get_connected_edges(self):
         """Tests the get_connected_edges function"""
         ev = evacsim.EvacSim()
         ev.load_models()
-        self.assertEqual(len(ev.get_connected_edges(ev.nodes['Troy'])), 5)
-        self.assertEqual(len(ev.get_connected_edges(ev.nodes['Albany'])), 3)
+        for edge in ev.edges:
+            self.assertTrue(edge.source in ev.get_connected_edges(edge.dest))
+            self.assertTrue(edge.dest in ev.get_connected_edges(edge.source))
     
     def test_generate_evacuation_routes(self):
         """Tests the generate_evacuation_routes function"""

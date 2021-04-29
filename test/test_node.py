@@ -2,6 +2,7 @@ import unittest
 import evacsim.node
 
 class TestNode(unittest.TestCase):
+    """Tests functionality in the node module"""
 
     def test_eq(self):
         """Tests the __eq__ function"""

@@ -2,6 +2,7 @@ import unittest
 import evacsim.polygon
 
 class TestPolygon(unittest.TestCase):
+    """Tests the functionality in the polygon module"""
 
     def test_contains(self):
         """Tests the contains function"""

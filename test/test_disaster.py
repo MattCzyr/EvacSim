@@ -3,6 +3,7 @@ import evacsim.disaster
 import evacsim.polygon
 
 class TestDisaster(unittest.TestCase):
+    """Tests functionality in the disaster module"""
 
     def test_add_data(self):
         """Tests the add_data function"""

@@ -4,6 +4,7 @@ import evacsim.edge
 import evacsim.route
 
 class TestRoute(unittest.TestCase):
+    """Tests functionality in the route module"""
 
     def test_get_node_path(self):
         """Tests the get_node_path function"""

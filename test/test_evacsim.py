@@ -2,6 +2,9 @@ import unittest
 import evacsim.evacsim
 
 class TestEvacSim(unittest.TestCase):
+    """Tests functionality in the evacsim module. These tests are meant to be generic, meaning they will still pass if
+       the Troy model is changed. For example, test_load_models simply tests that nodes, edges, and a natural disaster
+       exist after load_models is called, rather than ensuring that any specific objects are created."""
 
     def test_load_models(self):
         """Tests the get_affected_nodes function"""

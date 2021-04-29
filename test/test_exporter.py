@@ -6,6 +6,8 @@ import evacsim.disaster
 import evacsim.exporter
 
 class TestExporter(unittest.TestCase):
+    """Tests functionality in the exporter module. There isn't much to be tested here, so it simply tests
+       that a KML file with the proper name is created when the export_kml function is called."""
 
     def test_export_kml(self):
         """Tests the export_kml function"""

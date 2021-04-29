@@ -32,5 +32,8 @@ class TestEvacSim(unittest.TestCase):
         ev = evacsim.EvacSim()
         ev.load_models()
         ev.generate_evacuation_routes()
-        self.assertEqual()
-
+        for node in ev.get_affected_nodes():
+            self.assertEqual(node.population, 0)
+            self.assertEqual(node.population, 0)
+        for node in ev.nodes:
+            self.assertLessEqual(node.population, node.capacity)

@@ -1,18 +1,19 @@
 import unittest
-import node
-import edge
-import disaster
-import exporter
 import os
+import evacsim.node
+import evacsim.edge
+import evacsim.disaster
+import evacsim.exporter
 
 class TestExporter(unittest.TestCase):
 
     def test_export_kml(self):
         """Tests the export_kml function"""
-        nodes = {'Troy': node.Node('Troy', 42.727453, -73.691764, 50000, 80000), 'Watervliet': node.Node('Watervliet', 42.730389, -73.701504, 10000, 15000)}
-        edges = [edge.Edge(nodes['Troy'], nodes['Watervliet'], 25, 0, 1000)]
-        disaster = disaster.Disaster('Alfred')
-        exp = exporter.Exporter(nodes, edges, disaster, 'test.kml')
+        nodes = {'Troy': evacsim.node.Node('Troy', 42.727453, -73.691764, 50000, 80000), 'Watervliet': evacsim.node.Node('Watervliet', 42.730389, -73.701504, 10000, 15000)}
+        edges = [evacsim.edge.Edge(nodes['Troy'], nodes['Watervliet'], 25, 0, 1000)]
+        disaster = evacsim.disaster.Disaster('Alfred')
+        routes = []
+        exp = evacsim.exporter.Exporter(nodes, edges, disaster, routes, 'test.kml')
         exp.export_kml()
         self.assertTrue(os.path.exists('test.kml'))
         os.remove('test.kml')

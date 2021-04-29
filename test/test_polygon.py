@@ -11,10 +11,10 @@ class TestPolygon(unittest.TestCase):
         self.assertFalse(poly.contains(42.719554, -73.746986))
 
     def test_reverse(self):
-        """Tests the reverseLatLng function"""
+        """Tests the reverse_lat_lng function"""
         poly = evacsim.polygon.Polygon([(42.750958, -73.675494), (42.723977, -73.664851), (42.724607, -73.696780)])
         points = poly.points
-        reversed_points = poly.reverseLatLng()
+        reversed_points = poly.reverse_lat_lng()
         for i in range(len(points)):
             self.assertEqual(points[i][0], reversed_points[i][1])
             self.assertEqual(points[i][1], reversed_points[i][0])

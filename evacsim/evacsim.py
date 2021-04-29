@@ -1,12 +1,12 @@
 import argparse
 import csv
 import copy
-import node
-import edge
-import disaster
-import polygon
-import route
-import exporter
+from . import node
+from . import edge
+from . import disaster
+from . import polygon
+from . import route
+from . import exporter
 
 class EvacSim:
     """

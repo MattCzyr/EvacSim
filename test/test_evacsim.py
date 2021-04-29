@@ -15,7 +15,7 @@ class TestEvacSim(unittest.TestCase):
         """Tests the get_affected_nodes function"""
         ev = evacsim.evacsim.EvacSim()
         ev.load_models()
-        for node in ev.nodes:
+        for node in ev.nodes.values():
             for data in ev.disaster.data:
                 if data.effect.contains(node.lat, node.lng):
                     self.assertTrue(node in ev.get_affected_nodes())
@@ -25,8 +25,8 @@ class TestEvacSim(unittest.TestCase):
         ev = evacsim.evacsim.EvacSim()
         ev.load_models()
         for edge in ev.edges:
-            self.assertTrue(edge.source in ev.get_connected_edges(edge.dest))
-            self.assertTrue(edge.dest in ev.get_connected_edges(edge.source))
+            self.assertTrue(edge in ev.get_connected_edges(edge.dest))
+            self.assertTrue(edge in ev.get_connected_edges(edge.source))
     
     def test_generate_evacuation_routes(self):
         """Tests the generate_evacuation_routes function"""
@@ -34,7 +34,14 @@ class TestEvacSim(unittest.TestCase):
         ev.load_models()
         ev.generate_evacuation_routes()
         for node in ev.get_affected_nodes():
-            self.assertEqual(node.population, 0)
-            self.assertEqual(node.population, 0)
-        for node in ev.nodes:
-            self.assertLessEqual(node.population, node.capacity)
+            evacuated_population = 0
+            for route in ev.routes:
+                if route.source == node:
+                    evacuated_population += route.travelers
+            self.assertEqual(evacuated_population, node.population)
+        for node in ev.nodes.values():
+            new_population = node.population
+            for route in ev.routes:
+                if route.dest == node:
+                    new_population += route.travelers
+            self.assertLessEqual(new_population, node.capacity)

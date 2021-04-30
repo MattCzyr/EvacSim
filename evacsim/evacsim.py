@@ -15,7 +15,7 @@ class EvacSim:
     """
 
     def __init__(self):
-        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml','run':False}
+        self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml', 'run': False, 'verbose': False}
         self.nodes = {}
         self.edges = []
         self.disaster = None
@@ -29,7 +29,8 @@ class EvacSim:
         parser.add_argument('--disaster', '-d', help='Specify disaster model file name')
         parser.add_argument('--dir', help='Specify directory to read models from')
         parser.add_argument('--export', help='Specify a filename for the exported KML data')
-        parser.add_argument('--run', help='Choose whether or not to autorun exported KML file (provided Google Earth is installed)')
+        parser.add_argument('--run', help='Automatically runs Google Earth to open the exported KML file, provided Google Earth is installed')
+        parser.add_argument('--verbose', help='Runs in verbose mode, producing more output about generated evacuation routes')
         return parser
 
     def parse_args(self, parser):
@@ -46,7 +47,9 @@ class EvacSim:
         if args.export:
             self.args['export'] = args.export
         if args.run:
-            self.args['run'] = args.run
+            self.args['run'] = args.run.lower() == 'true'
+        if args.verbose:
+            self.args['verbose'] = args.verbose.lower() == 'true'
 
     def load_models(self):
         """Loads the models from the file names in the arguments"""
@@ -96,6 +99,7 @@ class EvacSim:
 
     def generate_evacuation_routes(self):
         """Runs a minimum cost flow algorithm on each city within the natural disaster's area of effect to generate an evacuation route"""
+        print('Generating evacuation routes...')
         # All nodes that have been affected by the natural disaster
         affected_nodes = self.get_affected_nodes()
         # A relative model that will be altered as populations shift
@@ -105,6 +109,10 @@ class EvacSim:
         for affected_node in affected_nodes:
             self.generate_evacuation_routes_for_node(affected_node, affected_node, relative_nodes, [], [], evac_routes)
         self.routes = evac_routes
+        # Output routes if running in verbose mode
+        if self.args['verbose']:
+            for route in self.routes:
+                print(route)
 
     def generate_evacuation_routes_for_node(self, node, affected_node, relative_nodes, visited_nodes, current_route, evac_routes):
         """Recursively generates evacuation routes for the affected node, ensuring that the population capacities

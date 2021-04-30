@@ -42,8 +42,9 @@ following `nodes.csv` file modeling populations around Troy, NY:
 Similar models exist for edges and natural disasters:
 - `edges.csv`: Models infrastructure (ie. roads) between populations by source
   node, destination node, transit time, and maximum capacity.
-- `disaster.csv`: Models the natural disaster by its area of effect at
-  different times.
+- `disaster.csv`: Models the natural disaster with polygons, representing its
+  area of effect at different times. Area of effect polygons can have any
+  number of sides, as long as they are ordered clockwise or counter-clockwise.
 
 Examples can be found in the [models](../models/) folder.
 

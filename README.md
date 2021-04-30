@@ -3,7 +3,9 @@
 EvacSim is a deterministic simulation that uses graph theory and linear
 programming to model the effects of natural disasters on communities in order
 to find optimal evacuation routes. This project was originally developed for
-HackRPI 2019, a 24-hour hackathon in which it won 2nd place.
+HackRPI 2019, a 24-hour hackathon in which it won 2nd place.  The project has now
+been overhauled as an open-source platform, in the hopes that it will become a
+service that can be used for the greater good.
 
 ## Background
 

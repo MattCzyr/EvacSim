@@ -9,11 +9,11 @@ from . import route
 from . import exporter
 
 class EvacSim:
+    # Declares default arguments and default directories, to allow for easier execution.
     """
     Represents the simulation itself, which is responsible for parsing arguments, loading models,
     running the flow algorithm, and exporting resulting data to a KML file
     """
-
     def __init__(self):
         self.args = {'nodes': 'nodes.csv', 'edges': 'edges.csv', 'disaster': 'disaster.csv', 'dir': 'models/troy_model/', 'export': 'export.kml', 'run': False, 'verbose': False}
         self.nodes = {}

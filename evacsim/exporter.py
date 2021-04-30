@@ -29,7 +29,8 @@ class Exporter:
 
         # Add edges to KML
         for edge in self.edges:
-            kml.newlinestring(name=f'Infrastructure between {edge.source.name} and {edge.dest.name}', description=f'Travel Time: {edge.travel_time}\nCapacity: {edge.capacity}', coords=[(edge.source.lng, edge.source.lat), (edge.dest.lng, edge.dest.lat)])
+            edge_line = kml.newlinestring(name=f'Infrastructure between {edge.source.name} and {edge.dest.name}', description=f'Travel Time: {edge.travel_time}\nCapacity: {edge.capacity}', coords=[(edge.source.lng, edge.source.lat), (edge.dest.lng, edge.dest.lat)])
+            edge_line.style.linestyle.color = simplekml.Color.lightgray
 
         # Add disaster data to KML
         for datum in self.disaster.data:

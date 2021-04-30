@@ -12,6 +12,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
+
+    # This is the main window for the mapview, meaning this is where all the widgets for
+    # the mapview are instantiated.  Names and other properties can be
+    # changed below.
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1256, 884)
@@ -44,6 +49,12 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
+    
+    # This is the retranslation code, meaning everytime the main window undergoes
+    # a change, the property update values must go here.  Names and other properties 
+    # can be changed below as with the main window, but must be tied to a trigger.
+    
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
